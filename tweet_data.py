@@ -12,23 +12,9 @@ def DBConnect(dbName=None):
 
 
 def createDB(dbName: str) -> None:
-    """
-
-    Parameters
-    ----------
-    dbName :
-        str:
-    dbName :
-        str:
-    dbName:str :
-
-
-    Returns
-    -------
-
-    """
+    
     conn, cur = DBConnect()
-    cur.execute(f"CREATE DATABASE IF NOT EXISTS {dbName};")
+    cur.execute("CREATE DATABASE IF NOT EXISTS {dbName};")
     conn.commit()
     cur.close()
 
@@ -53,22 +39,9 @@ def createTables(dbName: str) -> None:
 
     return
 
+
 def preprocess_df(df: pd.DataFrame) -> pd.DataFrame:
-    """
-
-    Parameters
-    ----------
-    df :
-        pd.DataFrame:
-    df :
-        pd.DataFrame:
-    df:pd.DataFrame :
-
-
-    Returns
-    -------
-
-    """
+   
     cols_2_drop = ['Unnamed: 0', 'timestamp', 'sentiment', 'possibly_sensitive', 'cleaned_text']
     try:
         df = df.drop(columns=cols_2_drop, axis=1)
@@ -139,4 +112,4 @@ if __name__ == "__main__":
 
     df = pd.read_csv('cleaned_tweet.csv')
 
-    insert_tweet(dbName='tweets', df=df, table_name='TweetInformation')
+    insert_tweet(dbName='twitterAnalysis', df=df, table_name='Tweets')
